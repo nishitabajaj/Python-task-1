@@ -1,0 +1,24 @@
+#Python program to send emails to other people
+import smtplib
+
+x = smtplib.SMTP_SSL('smtp.googlemail.com', 465)
+
+try :
+    sndr = input("Enter sender's email address : ")
+    passwd = input("Enter the password : ")
+    
+    rcvr = input("Enter receiver's email address : ")
+    sub = input("Enter the subject of the email : ")
+    body = input("Enter body of the email : ")
+    msg = ("Subject : {0}\n\n\n{1}".format(sub,body))
+    
+    x.login(sndr,passwd)
+    x.sendmail(sndr,rcvr,msg)
+    print("Email sent")
+    x.quit()
+    
+except smtplib.SMTPAuthenticationError:
+    print("Authentication error occured")
+
+except :
+    print("Failed to send the email")
